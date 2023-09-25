@@ -1,3 +1,5 @@
+
+
 function hammingdist(x::AbstractArray, y::AbstractArray) 
     lx = length(x) 
     if lx != length(y)
@@ -9,12 +11,11 @@ function hammingdist(x::AbstractArray, y::AbstractArray)
     s = 0
     for i in 1:lx
         if x[i] != y[i]
-        s += 1
+            s += 1
         end
     end
     return s
 end
-
 
 function hammingdist(a::String, b::String)
     la = length(a) 
@@ -27,39 +28,51 @@ function hammingdist(a::String, b::String)
     s = 0
     for i in 1:la
         if a[i] != b[i]
-        s += 1
+            s += 1
         end
     end
     return s
 end
 
 
-x = [1, 2, 3]
-y = [1, 1, 1, 1]
-z = [1, 1, 1]
-a = [0, 0, 0]
+function hammingdist2(x::AbstractArray, y::AbstractArray) 
+    lx = length(x) 
+    lx != length(y) && throw(DimensionMismatch("first array has length $(lx) which does not match the length of the second, $(length(y))."))
 
-# using LinearAlgebra
-# dot(x, y) 
-# @which dot(x, y)
-# @edit dot(x, y) 
+    if lx == 0
+        return 0
+    end
 
-# hammingdist(x, y) # gives the same error as dot(x, y)  
-
-println("The Hamming distance between $(x) and $(x) is $(hammingdist(x, x))")
-println("The Hamming distance between $(x) and $(z) is $(hammingdist(x, z))")
-println("The Hamming distance between $(x) and $(a) is $(hammingdist(x, a))")
-println("The Hamming distance between [] and [] is $(hammingdist([], []))")
+    # comprehension
+    v = [i1 != i2 for (i1, i2) in zip(x, y)] # is creating a vector of booleans 0 and 1
+    s = sum(v)
+end
 
 
-# "Hello" == "Hello"
-# "Hello" == "World"
-# "Hello" == "Hi"
-# Here I can also compare strings of different lengths
-# @edit ==("Hello", "Hi")
+function hammingdist3(x::AbstractArray, y::AbstractArray) 
+    lx = length(x) 
+    lx != length(y) && throw(DimensionMismatch("first array has length $(lx) which does not match the length of the second, $(length(y))."))
 
-# hammingdist("Hello", "Hi")
-println()
-println("The Hamming distance between ''Hello'' and ''Hello'' is $(hammingdist("Hello", "Hello"))")
-println("The Hamming distance between ''castle'' and ''battle'' is $(hammingdist("castle", "battle"))")
-println("The Hamming distance between '' '' and '' '' is $(hammingdist("", ""))")
+    if lx == 0
+        return 0
+    end
+
+    # generator
+    g = (i1 != i2 for (i1, i2) in zip(x, y)) 
+    s = sum(g)
+end
+
+
+function hammingdist4(x::AbstractArray, y::AbstractArray) 
+    lx = length(x) 
+    lx != length(y) && throw(DimensionMismatch("first array has length $(lx) which does not match the length of the second, $(length(y))."))
+
+    if lx == 0
+        return 0
+    end
+
+    # count ???
+    # count(t -> t[1] != t[2], zip(x, y))
+    
+end
+
