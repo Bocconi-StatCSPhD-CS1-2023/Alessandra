@@ -45,7 +45,7 @@ function hammingdist2(x::AbstractArray, y::AbstractArray)
 
     # comprehension
     v = [i1 != i2 for (i1, i2) in zip(x, y)] # is creating a vector of booleans 0 and 1
-    s = sum(v)
+    return sum(v)
 end
 
 
@@ -59,7 +59,7 @@ function hammingdist3(x::AbstractArray, y::AbstractArray)
 
     # generator
     g = (i1 != i2 for (i1, i2) in zip(x, y)) 
-    s = sum(g)
+    return sum(g)
 end
 
 
